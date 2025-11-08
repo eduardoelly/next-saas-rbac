@@ -1,6 +1,7 @@
 import { config } from "dotenv";
 import { resolve } from "path";
-import { defineConfig, env } from "prisma/config";
+import { defineConfig} from "prisma/config";
+import { env } from "@saas/env";
 
 const cwd = process.cwd();
 config({ path: resolve(cwd, ".env") });
@@ -13,6 +14,6 @@ export default defineConfig({
   },
   engine: "classic",
   datasource: {
-    url: env("DATABASE_URL"),
+    url: env.DATABASE_URL,
   },
 });
