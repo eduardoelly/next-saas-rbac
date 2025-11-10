@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker'
-import { PrismaClient } from '../src/generated/prisma/client'
 import { hash } from 'bcryptjs'
+
+import { PrismaClient } from '../src/generated/prisma/client'
 
 const prisma = new PrismaClient()
 
