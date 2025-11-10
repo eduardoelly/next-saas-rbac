@@ -1,0 +1,14 @@
+# Dependencies
+node_modules
+.next
+out
+build
+
+# Generated files
+next-env.d.ts
+
+# Other
+*.config.js
+*.config.ts
+postcss.config.mjs
+

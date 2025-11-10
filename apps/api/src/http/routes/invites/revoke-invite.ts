@@ -58,6 +58,6 @@ export async function revokeInvite(app: FastifyInstance) {
         })
 
         reply.code(204).send()
-      },
+      }
     )
 }

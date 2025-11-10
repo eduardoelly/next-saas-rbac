@@ -21,15 +21,15 @@ export async function getOrganization(app: FastifyInstance) {
           response: {
             200: z.object({
               organization: z.object({
-                id: z.string().uuid(),
+                id: z.uuid(),
                 name: z.string(),
                 slug: z.string(),
                 domain: z.string().nullable(),
                 shouldAttachUsersByDomain: z.boolean(),
-                avatarUrl: z.string().url().nullable(),
+                avatarUrl: z.url().nullable(),
                 createdAt: z.date(),
                 updatedAt: z.date(),
-                ownerId: z.string().uuid(),
+                ownerId: z.uuid(),
               }),
             }),
           },
@@ -41,6 +41,6 @@ export async function getOrganization(app: FastifyInstance) {
         const { organization } = await request.getUserMembership(slug)
 
         return { organization }
-      },
+      }
     )
 }

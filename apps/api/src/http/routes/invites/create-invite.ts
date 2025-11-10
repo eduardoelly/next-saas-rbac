@@ -21,7 +21,7 @@ export async function createInvite(app: FastifyInstance) {
           summary: 'Create a new invite',
           security: [{ bearerAuth: [] }],
           body: z.object({
-            email: z.string().email(),
+            email: z.email(),
             role: roleSchema,
           }),
           params: z.object({
@@ -29,7 +29,7 @@ export async function createInvite(app: FastifyInstance) {
           }),
           response: {
             201: z.object({
-              inviteId: z.string().uuid(),
+              inviteId: z.uuid(),
             }),
           },
         },
@@ -44,7 +44,7 @@ export async function createInvite(app: FastifyInstance) {
 
         if (cannot('create', 'Invite')) {
           throw new UnauthorizedError(
-            `You're not allowed to create new invites.`,
+            `You're not allowed to create new invites.`
           )
         }
 
@@ -57,7 +57,7 @@ export async function createInvite(app: FastifyInstance) {
           domain !== organization.domain
         ) {
           throw new BadRequestError(
-            `Users with '${domain}' domain will join your organization automatically on login.`,
+            `Users with '${domain}' domain will join your organization automatically on login.`
           )
         }
 
@@ -72,7 +72,7 @@ export async function createInvite(app: FastifyInstance) {
 
         if (inviteWithSameEmail) {
           throw new BadRequestError(
-            'Another invite with same e-mail already exists.',
+            'Another invite with same e-mail already exists.'
           )
         }
 
@@ -87,7 +87,7 @@ export async function createInvite(app: FastifyInstance) {
 
         if (memberWithSameEmail) {
           throw new BadRequestError(
-            'A member with this e-mail already belongs to your organization.',
+            'A member with this e-mail already belongs to your organization.'
           )
         }
 
@@ -103,6 +103,6 @@ export async function createInvite(app: FastifyInstance) {
         return reply.status(201).send({
           inviteId: invite.id,
         })
-      },
+      }
     )
 }

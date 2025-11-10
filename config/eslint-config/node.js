@@ -1,8 +1,30 @@
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
-  extends: ['@rocketseat/eslint-config/node'],
-  plugins: ['simple-import-sort'],
+  env: {
+    es2021: true,
+    node: true,
+  },
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
+  ],
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
+  plugins: ['@typescript-eslint', 'simple-import-sort', 'prettier'],
   rules: {
+    'prettier/prettier': 'error',
     'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+      },
+    ],
   },
 }

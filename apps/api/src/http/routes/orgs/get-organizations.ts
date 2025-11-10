@@ -21,12 +21,12 @@ export async function getOrganizations(app: FastifyInstance) {
             200: z.object({
               organizations: z.array(
                 z.object({
-                  id: z.string().uuid(),
+                  id: z.uuid(),
                   name: z.string(),
                   slug: z.string(),
-                  avatarUrl: z.string().url().nullable(),
+                  avatarUrl: z.url().nullable(),
                   role: roleSchema,
-                }),
+                })
               ),
             }),
           },
@@ -65,10 +65,10 @@ export async function getOrganizations(app: FastifyInstance) {
               ...org,
               role: members[0].role,
             }
-          },
+          }
         )
 
         return { organizations: organizationsWithUserRole }
-      },
+      }
     )
 }
