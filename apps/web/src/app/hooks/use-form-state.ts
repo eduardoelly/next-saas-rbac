@@ -17,7 +17,7 @@ export function useFormState(
     initialState ?? { success: false, message: null, errors: null }
   )
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
     const form = event.currentTarget
@@ -26,11 +26,15 @@ export function useFormState(
     startTransition(async () => {
       const state = await action(data)
 
-      if (state.success && onSuccess) {
-        await onSuccess()
+      if (state.success) {
+        form.reset()
       }
 
       setFormState(state)
+
+      if (state.success && onSuccess) {
+        await onSuccess()
+      }
     })
   }
 
